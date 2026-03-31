@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Waste — Smart Kitchen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon">🌿</div>
+            <div class="logo-text"><strong>Smart Kitchen</strong><span>Food Waste Logger</span></div>
+        </div>
+        <nav>
+            <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+            <a href="add-record.html" class="nav-link active">➕ Log Waste</a>
+            <a href="records.html" class="nav-link">📋 Records</a>
+            <a href="analytics.html" class="nav-link" id="analyticsLink" style="display:none">📊 Analytics</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="user-box">
+                <div class="user-avatar">👤</div>
+                <div><div class="user-name" id="userName">Loading...</div><div class="user-role" id="userRole"></div></div>
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Log Food Waste</h1>
+            <p>Record accurately to help improve food planning.</p>
+        </div>
+
+        <div style="max-width: 600px">
+            <div class="card">
+                <div id="successMsg" class="alert alert-success"></div>
+                <div id="errorMsg" class="alert alert-error"></div>
+
+                <form id="wasteForm">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Day of Week</label>
+                            <input type="text" id="day" readonly style="background:#f1f5f9; cursor:not-allowed">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Food Item Name</label>
+                        <input type="text" id="foodItem" placeholder="e.g. Boiled Rice, Dal, Roti" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity Wasted (kg)</label>
+                        <input type="number" id="quantity" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">💾 Save Record</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    
+</body>
+</html>

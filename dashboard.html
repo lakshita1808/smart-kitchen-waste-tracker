@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Smart Kitchen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="layout">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">🌿</div>
+        <div class="logo-text">
+            <strong>Smart Kitchen</strong>
+            <span>Food Waste Logger</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="dashboard.html" class="nav-link active">🏠 Dashboard</a>
+        <a href="add-record.html" class="nav-link">➕ Log Waste</a>
+        <a href="records.html" class="nav-link">📋 Records</a>
+        <a href="analytics.html" class="nav-link" id="analyticsLink" style="display:none">📊 Analytics</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <div class="user-box">
+            <div class="user-avatar">👤</div>
+            <div>
+                <div class="user-name" id="userName"></div>
+                <div class="user-role" id="userRole"></div>
+            </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+    </div>
+</aside>
+
+<main class="main-content">
+
+    <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Overview of food waste statistics</p>
+    </div>
+
+    <div class="cards-grid">
+        <div class="stat-card">
+            <div class="stat-label">Total Waste</div>
+            <div class="stat-value" id="totalWaste">0 kg</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Today Waste</div>
+            <div class="stat-value" id="todayWaste">0 kg</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Total Records</div>
+            <div class="stat-value" id="totalRecords">0</div>
+        </div>
+    </div>
+
+</main>
+
+<script src="js/main.js"></script>
+
+<script>
+(async () => {
+    const user = await checkAuth();
+    if (!user) return;
+
+    setUserInfo(user);
+
+    if (user.role === 'admin') {
+        document.getElementById('analyticsLink').style.display = 'flex';
+    }
+
+    const res = await fetch('/api/waste');
+    const records = await res.json();
+
+    const total = records.reduce((sum, r) => sum + parseFloat(r.quantity_kg), 0);
+    document.getElementById('totalWaste').textContent = total.toFixed(2) + ' kg';
+
+    document.getElementById('totalRecords').textContent = records.length;
+
+    const today = new Date().toISOString().split('T')[0];
+    const todayWaste = records
+        .filter(r => r.date === today)
+        .reduce((sum, r) => sum + parseFloat(r.quantity_kg), 0);
+
+    document.getElementById('todayWaste').textContent = todayWaste.toFixed(2) + ' kg';
+})();
+</script>
+
+</body>
+</html>

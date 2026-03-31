@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Smart Kitchen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-left">
+        <div class="logo">🌿</div>
+        <h1>Track waste.<br>Save resources.<br>Cook smarter.</h1>
+        <p>Smart Kitchen Food Waste Logging & Analytics System for hostel messes.</p>
+    </div>
+
+    <div class="auth-right">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to your account to continue</p>
+
+        <div id="errorMsg" class="alert alert-error"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+        </form>
+
+        <p class="auth-link">Don't have an account? <a href="register.html">Sign Up</a></p>
+
+        <div class="demo-box">
+            <p class="demo-title">Demo Credentials</p>
+            <div class="demo-grid">
+                <div><strong style="color:#16a34a">Admin</strong><br>User: admin<br>Pass: admin123</div>
+                <div><strong>Staff</strong><br>User: staff1<br>Pass: staff123</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

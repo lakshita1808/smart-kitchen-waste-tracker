@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — Smart Kitchen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-left">
+        <div class="logo">🌿</div>
+        <h1>Join Smart Kitchen.<br>Log smarter.<br>Waste less.</h1>
+        <p>Create your account to start tracking food waste and contributing to a sustainable kitchen.</p>
+    </div>
+
+    <div class="auth-right">
+        <h2>Create Account</h2>
+        <p class="subtitle">Fill in your details to get started</p>
+
+        <div id="errorMsg" class="alert alert-error"></div>
+        <div id="successMsg" class="alert alert-success"></div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="e.g. Priya Sharma" required>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="e.g. priya_sharma" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <select id="role">
+                    <option value="staff">Staff (Kitchen Worker)</option>
+                    <option value="admin">Admin (Mess Manager)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Minimum 6 characters" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirm" placeholder="Re-enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+        </form>
+
+        <p class="auth-link">Already have an account? <a href="index.html">Sign In</a></p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
