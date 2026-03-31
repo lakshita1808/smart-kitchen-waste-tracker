@@ -1,3 +1,5 @@
+
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const session = require('express-session');
@@ -16,18 +18,24 @@ app.use(session({
   cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
 }));
 
+// ✅ Database connection using Railway .env variables
 const db = mysql.createConnection({
-  host: 'localhost',
-  port: 3307,
-  user: 'root',
-  password: 'root123',
-  database: 'kitchen_waste_db'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
 });
 
 db.connect((err) => {
-  if (err) { console.log('DB Error:', err); return; }
+  if (err) {
+    console.error('DB Error:', err);
+    return;
+  }
   console.log('MySQL Connected!');
 });
+
+// ------------------ AUTH ROUTES ------------------
 
 // Register
 app.post('/api/register', async (req, res) => {
@@ -78,6 +86,8 @@ app.get('/api/me', (req, res) => {
   res.json(req.session.user);
 });
 
+// ------------------ WASTE RECORD ROUTES ------------------
+
 // Add waste record
 app.post('/api/waste', (req, res) => {
   if (!req.session.user) return res.status(401).json({ error: 'Not logged in' });
@@ -116,4 +126,7 @@ app.delete('/api/waste/:id', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Server running at http://localhost:3000'));
+// ------------------ SERVER ------------------
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+
